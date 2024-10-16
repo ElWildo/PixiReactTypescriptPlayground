@@ -1,10 +1,9 @@
 import { useApp } from "@pixi/react";
 import { Application, Assets, ICanvas } from "pixi.js";
 import { Fragment, useEffect, useState } from "react";
-import cardSpirtesheets from "/spritesheets/spritesheetcollection.json?url";
-// import RandomMessageElement from "../components/RandomMessageElement";
 import { Html } from "../tunnels/Hmtl";
 import RandomMessageElement from "../components/RandomMessageElement";
+import cardSpirtesheets from "/spritesheets/spritesheetcollection.json?url";
 import classes from "./message-randomizer.module.scss";
 
 export default function MessageRandomizer() {
@@ -15,6 +14,11 @@ export default function MessageRandomizer() {
     app: app,
   };
   const [loaded, SetLoaded] = useState(false);
+  const [messageElements, setMessageElements] = useState([
+    <RandomMessageElement key={"el_0"} />,
+    <RandomMessageElement key={"el_1"} />,
+    <RandomMessageElement key={"el_2"} />,
+  ]);
 
   useEffect(() => {
     const load = async () => {
@@ -23,7 +27,18 @@ export default function MessageRandomizer() {
         await Assets.load(cardSpirtesheets).then(() => SetLoaded(true));
     };
     load();
-    return () => Assets.reset();
+    const loop = setInterval(() => {
+      const newMessage = [
+        <RandomMessageElement key={"el_0"} />,
+        <RandomMessageElement key={"el_1"} />,
+        <RandomMessageElement key={"el_2"} />,
+      ];
+      setMessageElements(newMessage);
+    }, 2000);
+    return () => {
+      Assets.reset();
+      clearInterval(loop);
+    };
 
     //It's loading it 2 times and i dont understand why
   }, []);
@@ -32,11 +47,7 @@ export default function MessageRandomizer() {
     loaded && (
       <Fragment>
         <Html.In>
-          <div className={classes.messageContainer}>
-            <RandomMessageElement />
-            <RandomMessageElement />
-            <RandomMessageElement />
-          </div>
+          <div className={classes.messageContainer}>{messageElements}</div>
         </Html.In>
       </Fragment>
     )
