@@ -4,12 +4,12 @@ import TaskTwo from "../pages/TaskTwo.tsx";
 import TaskThree from "../pages/TaskThree.tsx";
 import Home from "../pages/Home.tsx";
 import { Fragment } from "react/jsx-runtime";
-import Nav from "./Nav.tsx";
+import UI from "./UI.tsx";
 
 export default function BaseRoutes() {
   return (
     <Fragment>
-      <Nav />
+      <UI />
       <Routes>
         <Route path="/" Component={() => <Home />} />
         <Route path="/task_one" Component={() => <TaskOne />} />
