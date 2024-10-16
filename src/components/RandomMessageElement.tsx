@@ -23,7 +23,7 @@ export default function RandomMessageElement() {
             backgroundImage: `url(${cardSpirtesheetsImg})`,
             width: randomImg.frame.width,
             height: randomImg.frame.height,
-            backgroundPositionX: randomImg.frame.x,
+            backgroundPositionX: -randomImg.frame.x,
             backgroundPositionY: -randomImg.frame.y,
           }}
         />
