@@ -4,6 +4,8 @@ import { Fragment, useEffect, useState } from "react";
 import cardSpirtesheets from "/spritesheets/spritesheetcollection.json?url";
 // import RandomMessageElement from "../components/RandomMessageElement";
 import { Html } from "../tunnels/Hmtl";
+import RandomMessageElement from "../components/RandomMessageElement";
+import classes from "./message-randomizer.module.scss";
 
 export default function MessageRandomizer() {
   const app = useApp();
@@ -30,7 +32,11 @@ export default function MessageRandomizer() {
     loaded && (
       <Fragment>
         <Html.In>
-          <div>Prova</div>
+          <div className={classes.messageContainer}>
+            <RandomMessageElement />
+            <RandomMessageElement />
+            <RandomMessageElement />
+          </div>
         </Html.In>
       </Fragment>
     )
