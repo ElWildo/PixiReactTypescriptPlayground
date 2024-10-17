@@ -4,6 +4,8 @@ import CardsShift from "../games/CardsShift";
 import { StrictMode } from "react";
 
 export default function TaskOne() {
+  // We instantiate the Stage (PIXI application) and we add the game to it
+
   const { width, height } = useWindowDimensions();
 
   return (

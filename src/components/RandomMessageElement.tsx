@@ -4,6 +4,12 @@ import cardSpirtesheetsImg from "/spritesheets/spritesheetcollection.png?url";
 import { pokemonArray as vocabulary, randomInt } from "../utils_hooks/utils";
 
 export default function RandomMessageElement() {
+  /**
+   *  We instantiate random for image and text
+   *  then we randomize what kind of component
+   *  we want and then return accordingly
+   * */
+
   const spriteSheet = Assets.get<Spritesheet>(cardSpirtesheets);
   const imgNameList = Object.keys(spriteSheet.data.frames);
   const totImages = imgNameList.length;

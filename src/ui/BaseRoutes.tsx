@@ -7,6 +7,8 @@ import { Fragment } from "react/jsx-runtime";
 import UI from "./UI.tsx";
 
 export default function BaseRoutes() {
+  // We create routing and we add UI rendering into React Application
+
   return (
     <Fragment>
       <UI />

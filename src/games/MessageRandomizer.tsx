@@ -6,8 +6,15 @@ import RandomMessageElement from "../components/RandomMessageElement";
 import cardSpirtesheets from "/spritesheets/spritesheetcollection.json?url";
 import classes from "./message-randomizer.module.scss";
 
+/**
+ * Creates a component that return 2 random message elements
+ * and randomise them every 2 seconds
+ */
+
 export default function MessageRandomizer() {
   const app = useApp();
+
+  // This abilitate Pixi debugger in chrome
   (
     window as unknown as { __PIXI_DEVTOOLS__: { app: Application<ICanvas> } }
   ).__PIXI_DEVTOOLS__ = {
@@ -21,12 +28,14 @@ export default function MessageRandomizer() {
   ]);
 
   useEffect(() => {
+    // Loading assets on mount
     const load = async () => {
       const assets = await Assets.cache.has(cardSpirtesheets);
       if (!assets)
         await Assets.load(cardSpirtesheets).then(() => SetLoaded(true));
     };
     load();
+    // Create loop to update text every 2 seconds
     const loop = setInterval(() => {
       const newMessage = [
         <RandomMessageElement key={"el_0"} />,
@@ -39,8 +48,6 @@ export default function MessageRandomizer() {
       Assets.reset();
       clearInterval(loop);
     };
-
-    //It's loading it 2 times and i dont understand why
   }, []);
 
   return (

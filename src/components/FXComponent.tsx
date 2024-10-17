@@ -13,6 +13,10 @@ interface ConteinerWithEmitter extends Container {
   emitter?: Emitter;
 }
 
+/**
+ * Creates a custom component for the emitter
+ */
+
 const FXComponent = PixiComponent<
   {
     app: Application<ICanvas>;

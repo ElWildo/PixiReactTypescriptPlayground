@@ -7,6 +7,11 @@ export interface CardProps {
   index?: number;
 }
 
+/**
+ *  We instantiate a single card with texture based on the index
+ *  then we start to move it towards the endpoint calculating step length every tick
+ */
+
 export default function Card({ index = 0, paddingTop = 0 }: CardProps) {
   const horizontalPadding = 150;
   const app = useApp();

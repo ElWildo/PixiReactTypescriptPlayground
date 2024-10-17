@@ -4,17 +4,25 @@ import { Application, Assets, ICanvas } from "pixi.js";
 import cardSpirtesheets from "/spritesheets/spritesheetcollection.json?url";
 import { useEffect, useState } from "react";
 
+/**
+ * Create a component that handles a card list
+ */
+
 export default function CardsShift() {
   const app = useApp();
+
+  // This abilitate Pixi debugger in chrome
   (
     window as unknown as { __PIXI_DEVTOOLS__: { app: Application<ICanvas> } }
   ).__PIXI_DEVTOOLS__ = {
     app: app,
   };
+
   const paddingY = 100;
   const cardsInfos: { paddingTop: number; index: number }[] = [];
   const [loaded, SetLoaded] = useState(false);
 
+  // Set up infos about cards
   let spritePadding = 0;
   for (let i = 0; i < 144; i++) {
     cardsInfos.push({
@@ -25,6 +33,7 @@ export default function CardsShift() {
   }
 
   useEffect(() => {
+    // Loading assets on mount
     const load = async () => {
       const assets = await Assets.cache.has(cardSpirtesheets);
       if (!assets)
@@ -32,8 +41,6 @@ export default function CardsShift() {
     };
     load();
     return () => Assets.reset();
-
-    //It's loading it 2 times and i dont understand why
   }, []);
 
   return (

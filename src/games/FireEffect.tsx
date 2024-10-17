@@ -4,8 +4,14 @@ import { Application, Assets, ICanvas } from "pixi.js";
 import { useEffect, useState } from "react";
 import fx_spritesheet from "/spritesheets/revoltfx-spritesheet.json?url";
 
+/**
+ * Create a component that handles fire animation
+ */
+
 export default function FireEffect() {
   const app = useApp();
+
+  // This abilitate Pixi debugger in chrome
   (
     window as unknown as { __PIXI_DEVTOOLS__: { app: Application<ICanvas> } }
   ).__PIXI_DEVTOOLS__ = {
@@ -14,6 +20,7 @@ export default function FireEffect() {
   const [loaded, SetLoaded] = useState(false);
 
   useEffect(() => {
+    // Loading assets on mount
     const load = async () => {
       const assets = await Assets.cache.has(fx_spritesheet);
       if (!assets)
@@ -21,8 +28,6 @@ export default function FireEffect() {
     };
     load();
     return () => Assets.reset();
-
-    //It's loading it 2 times and i dont understand why
   }, []);
 
   return loaded && <FXComponent app={app} />;
